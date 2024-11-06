@@ -25,21 +25,23 @@ def play_hangman():
     words = ["яблоко", "машина", "компьютер", "программа", "книга", "робот", "питон"]
 
     rand_word = random.choice(words)
-    print(rand_word)
-    popitki = len(rand_word)
 
-    for i in range(1, len(rand_word)):
+    popitki = 14
 
-        string = input("Угадай букву слова... {}, - Количество букв, у Вас {} попыток   ".format(popitki, len(rand_word)))
+    for i in range(1, 14):
+
+        string = input(f"Угадай букву слова  , Количество букв = {len(rand_word)} , у Вас {popitki} попыток  . Удачи ! \nВведите букву :".format(popitki, len(rand_word)))
 
         bukwi = [a for a in rand_word]
 
         if string in bukwi:
             print("Такая буква есть!!!  Буква : ", string)
+
         else:
+            print("К сожалению , такой буквы нет в загаданном слове . Попробуй еще раз ! ")
             popitki -= 1
             if popitki == 0:
                 print("Вы проиграли...")
-
-
+                break
+play_hangman()
 
