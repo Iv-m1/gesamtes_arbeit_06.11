@@ -26,9 +26,9 @@ def play_hangman():
 
     rand_word = random.choice(words)
     print(rand_word)
-    popitki = len(rand_word)
+    popitki = 6
 
-    for i in range(1, len(rand_word)):
+    for i in range(1, 7):
 
         string = input("Угадай букву слова... {}, - Количество букв, у Вас {} попыток   ".format(popitki, len(rand_word)))
 
@@ -40,6 +40,9 @@ def play_hangman():
             popitki -= 1
             if popitki == 0:
                 print("Вы проиграли...")
+                print()
+                exit()
+
 
 
 play_hangman()
