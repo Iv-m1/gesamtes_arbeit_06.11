@@ -14,8 +14,32 @@
 # 5. Игра заканчивается победой, если все буквы слова угаданы, или проигрышем,
 # если количество штрафных очков достигает лимита (например, 6).
 
+import random
+
 def play_hangman():
     print()
     print()
-    print('play the game: HANGMAN')
+    print('play the game: << Виселица >>')
     print()
+
+    words = ["яблоко", "машина", "компьютер", "программа", "книга", "робот", "питон"]
+
+    rand_word = random.choice(words)
+    print(rand_word)
+    popitki = len(rand_word)
+
+    for i in range(1, len(rand_word)):
+
+        string = input("Угадай букву слова... {}, - Количество букв, у Вас {} попыток   ".format(popitki, len(rand_word)))
+
+        bukwi = [a for a in rand_word]
+
+        if string in bukwi:
+            print("Такая буква есть!!!  Буква : ", string)
+        else:
+            popitki -= 1
+            if popitki == 0:
+                print("Вы проиграли...")
+
+
+play_hangman()
