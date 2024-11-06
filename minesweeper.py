@@ -50,4 +50,5 @@
 def play_minesweeper():
     print()
     print()
-    print('play the game')
+    print('play the game: MINESWEEPER')
+    print()

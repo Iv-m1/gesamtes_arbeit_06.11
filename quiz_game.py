@@ -29,7 +29,9 @@
 # — 2. Порту
 # — 3. Мюнхен
 
-def play_text_adventure():
+def play_quiz_game():
     print()
     print()
-    print('play the game')
+    print('play the game: QUIZ_GAME')
+    print()
+    quest = {"Столица Франции?": ["1. Лондон", "2. Берлин", "3. Париж"], "Столица Германии?": ["1. Лондон", "2. Берлин", "3. Венеция"], }

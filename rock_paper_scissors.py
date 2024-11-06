@@ -6,8 +6,8 @@
 # Игра продолжается до тех пор, пока один из игроков (пользователь или компьютер)
 # не одержит на три победы больше, чем соперник. В конце показывается итоговый счет и объясляется победитель.
 
-git
-def play_guess_number():
+def play_rock_paper_scissors():
     print()
     print()
-    print('play the game')
+    print('play the game: ROCK-PAPER-SCISSORS')
+    print()
