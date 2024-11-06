@@ -7,11 +7,11 @@
 # main.py
 
 from guess_number import play_guess_number
-# from hangman import play_hangman
-# from minesweeper import play_minesweeper
-# from quiz_game import play_quiz_game
-# from rock_paper_scissors import play_rock_paper_scissors
-# from text_adventure import play_text_adventure
+from hangman import play_hangman
+from minesweeper import play_minesweeper
+from quiz_game import play_quiz_game
+from rock_paper_scissors import play_rock_paper_scissors
+from text_adventure import play_text_adventure
 
 def main():
     while True:
@@ -28,6 +28,24 @@ def main():
         if choice == '1':
             play_guess_number()
             print()
+        if choice == '2':
+            play_rock_paper_scissors()
+            print()
+        if choice == '3':
+            play_quiz_game()
+            print()
+        if choice == '4':
+            play_hangman()
+            print()
+        if choice == '5':
+            play_text_adventure()
+            print()
+        if choice == '6':
+            play_minesweeper()
+            print()
+        if choice == '7':
+            print("Программа завершина...")
+            exit()
 
 
 
