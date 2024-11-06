@@ -42,4 +42,4 @@ def play_hangman():
                 print("Вы проиграли...")
 
 
-play_hangman()
+
