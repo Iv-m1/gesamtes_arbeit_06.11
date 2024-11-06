@@ -3,6 +3,7 @@ import random
 def play_hangman():
     print("\nДобро пожаловать в игру: << Виселица >>\n")
 
+
     words = ["яблоко", "машина", "компьютер", "программа", "книга", "робот", "питон"]
     word = random.choice(words)  # Случайное слово
     guessed_word = ["_"] * len(word)  # Маскируем слово
