@@ -54,6 +54,6 @@ def play_hangman():
     else:
         print(f"Вы проиграли! Слово было: {word}")
 
-# Запуск игры
-if __name__ == "__main__":
-    play_hangman()
+# # Запуск игры
+# if __name__ == "__main__":
+#     play_hangman()

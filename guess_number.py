@@ -20,7 +20,7 @@ def play_guess_number():
     rand = random.randint(1,100)
     lis = []
     while True:
-        if len(lis) > 6:
+        if len(lis) > 5:
             print("Вы превысили количество попыток ! ")
             break
         a = int(input('Введите свое предполагаемое число :'))
@@ -33,8 +33,12 @@ def play_guess_number():
             print(f"Отлично! Вы угадали число  с {len(lis)} попытки!")
 
             break
+
+
+
     print(f"Ваши попытки : {lis} ")
     print (f"Число , которое я загадал : {rand}")
+
 
 
 

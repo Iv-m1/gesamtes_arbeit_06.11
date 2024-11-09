@@ -36,12 +36,15 @@ def play_hangman():
 
         if string in bukwi:
             print("Такая буква есть!!!  Буква : ", string)
+            popitki -= 1
 
         else:
             print("К сожалению , такой буквы нет в загаданном слове . Попробуй еще раз ! ")
             popitki -= 1
-            if popitki == 0:
-                print("Вы проиграли...")
-                break
-play_hangman()
+
+
+        if popitki == 0:
+            print("Вы проиграли...")
+
+
 
