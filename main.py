@@ -5,17 +5,13 @@
 # где находится меню и в котором запускается игра.
 #
 # main.py
+# FINAL
 
-from guess_number import play_guess_number
-from hangman import play_hangman
-from minesweeper import play_minesweeper
-from quiz_game import play_quiz_game
-from rock_paper_scissors import play_rock_paper_scissors
-from text_adventure import play_text_adventure
+from utility import *
 
 def main():
     while True:
-        print("\\nДобро пожаловать в Game Hub!")
+        print("\nДобро пожаловать в Game Hub!\n")
         print("1. Угадай число")
         print("2. Камень, ножницы, бумага")
         print("3. Викторина")
@@ -44,12 +40,11 @@ def main():
             play_minesweeper()
             print()
         if choice == '7':
-            print("Программа завершина...")
+            input("\nПрограмма завершина... Ввод - выход")
             exit()
 
 
-
-        # допишите файл main.py в конце и протестируйте работоспособность всех игр.
+# допишите файл main.py в конце и протестируйте работоспособность всех игр.
 #
 # Постарайтесь реализовать не только логику игры, но и обработать потенциальный ошибочный ввод пользователя.
 # Предусмотрите возможность досрочного завершения игры, возвращения в меню и выбор новой игры.

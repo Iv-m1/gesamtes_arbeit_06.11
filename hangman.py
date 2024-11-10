@@ -15,62 +15,166 @@
 # если количество штрафных очков достигает лимита (например, 6).
 
 import random
+# FINAL
 
-import random
 
 def play_hangman():
-    print("\nДобро пожаловать в игру: << Виселица >>\n")
+    print()
+    print("############################################")
+    print('play the game: << Виселица >>')
+    print("############################################")
+    print()
+    hang_man = [
+        """
+               -----
+                   |
+                   |
+                   |
+                   |
+                   |
+            =========
+            """,
+        """
+           -----
+           |   |
+               |
+               |
+               |
+               |
+        =========
+        """,
+        """
+           -----
+           |   |
+           O   |
+               |
+               |
+               |
+        =========
+        """,
+        """
+           -----
+           |   |
+           O   |
+           |   |
+               |
+               |
+        =========
+        """,
+        """
+           -----
+           |   |
+           O   |
+          /|   |
+               |
+               |
+        =========
+        """,
+        """
+           -----
+           |   |
+           O   |
+          /|\  |
+               |
+               |
+        =========
+        """,
+        """
+           -----
+           |   |
+           O   |
+          /|\  |
+          /    |
+               |
+        =========
+        """,
+        """
+           -----
+           |   |
+           O   |
+          /|\  |
+          / \  |
+               |
+        =========
+        """]
+    next_hangman = iter(hang_man)
 
     words = ["яблоко", "машина", "компьютер", "программа", "книга", "робот", "питон"]
-    word = random.choice(words)  # Случайное слово
-    guessed_word = ["_"] * len(word)  # Маскируем слово
-    attempts = 6  # Количество попыток
-    used_letters = set()  # Для хранения использованных букв
 
-    print(f"Слово состоит из {len(word)} букв: {' '.join(guessed_word)}")
-    print(f"У вас {attempts} попыток.\n")
+    rand_word = random.choice(words)
+    list_letter = list(rand_word)
+    print(list_letter)
 
-    while attempts > 0 and "_" in guessed_word:
-        letter = input("Введите букву (или попробуйте угадать слово): ").lower()
+    attemp = 7
+    len_word = len(rand_word)
+    print(len_word)
+    df = 0
+    if_letter_ = []
 
-        # Проверка, если игрок ввел больше одной буквы
-        if len(letter) > 1:
-            if letter == word:
-                print(f"\nПоздравляем! Вы угадали слово: {word}")
-                return
-            else:
-                attempts -= 1
-                print(f"Неверно! Это не то слово. Осталось попыток: {attempts}\n")
+    word_append_letter = []
+
+    for i in range(0, (len_word)):
+        word_append_letter.append("*")
+
+    print(next(next_hangman))
+    print()
+    # for win_letter in range((len_word) - 1):
+    #    word_append_letter[win_letter] = "_"
+    print("Слово :  " + " ".join(word_append_letter))
+
+    while True:
+        string = input("Угадай букву слова  , Количество букв = {} , у Вас {} попыток! \nВведите букву :".format(len(rand_word), attemp))
+        print()
+
+        if string in list_letter:
+            if string in if_letter_:
+                print("Эта буква уже была : ", string)
+                hangman = next(next_hangman)
+                print(hangman)
+                if attemp == 2:
+                    print("Последняя попытка!!! . Попробуй еще раз ! ")
+                    print("Слово :  " + " ".join(word_append_letter))
+
+                elif attemp < 2:
+                    #hangman = next(next_hangman)
+                    #print(hangman)
+                    print("Вы проиграли... :( , это СЛОВО : ", rand_word)
+                    print()
+                    s = input("Игра закончена. Клавиша ввод - дальше в меню")
+                    if not s:
+                        from main import main
+                        main()
+                attemp -= 1
                 continue
+            print("Такая буква есть!!!  Буква : ", string)
+            for idx, letter in enumerate(list_letter):
+                if letter == string:
+                    word_append_letter[idx] = string
+                if_letter_.append(letter)
 
-        # Проверка, что буква уже была введена
-        if letter in used_letters:
-            print("Вы уже использовали эту букву. Попробуйте другую.\n")
-            continue
+            print("Слово :" + " ".join(word_append_letter))
 
-        # Добавляем букву в использованные
-        used_letters.add(letter)
-
-        if letter in word:
-            print(f"Верно! Буква '{letter}' есть в слове.\n")
-            # Обновляем отображаемое слово
-            for i, char in enumerate(word):
-                if char == letter:
-                    guessed_word[i] = letter
         else:
-            attempts -= 1
-            print(f"Неверно! Буквы '{letter}' нет в слове. Осталось попыток: {attempts}\n")
+            if attemp > 2:
+                print("К сожалению , такой буквы нет в загаданном слове . Попробуй еще раз ! ")
+                print("Слово :  " + " ".join(word_append_letter))
+                hangman = next(next_hangman)
+                print(hangman)
+                attemp -= 1
+            elif attemp == 2:
+                #hangman = next(next_hangman)
+                #print(hangman)
+                print("Последняя попытка!!! . Попробуй еще раз ! ")
+                print("Слово :  " + " ".join(word_append_letter))
+                attemp -= 1
 
-        # Печать текущего состояния слова
-        print("Слово: ", " ".join(guessed_word))
-        print("Использованные буквы: ", ", ".join(sorted(used_letters)), "\n")
-
-    # Проверяем, угадал ли игрок слово
-    if "_" not in guessed_word:
-        print(f"Поздравляем! Вы угадали слово: {''.join(guessed_word)}")
-    else:
-        print(f"Вы проиграли! Слово было: {word}")
-
-# Запуск игры
-if __name__ == "__main__":
-    play_hangman()
+            elif attemp < 1:
+                hangman = next(next_hangman)
+                print(hangman)
+                print("Вы проиграли... :( , это СЛОВО : ", rand_word)
+                print()
+                s = input("Игра закончена. Клавиша ввод - дальше в меню")
+                if not s:
+                    from main import main
+                    main()
+            print(attemp)
