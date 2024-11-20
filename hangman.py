@@ -14,7 +14,25 @@
 # 5. Игра заканчивается победой, если все буквы слова угаданы, или проигрышем,
 # если количество штрафных очков достигает лимита (например, 6).
 
+# Игра "Виселица"
+#
+# За основу возьмите свой код, разработанный в предыдущем проектном уроке, посвященном Game Hub (урок 13).
+# Если в тот раз вы не реализовали весь функционал, то сначала реализуйте полностью игру, а затем переходите
+# к рефакторингу на основе заданий из этого урока.
+#
+# Рефакторинг
+# - Добавить логирование начала и окончания игры и всех попыток игрока с временными метками (дата и время).
+# - Добавить обработку ошибок с использованием `try/except`, где это необходимо.
+# - Добавить возможность сохранять текущий прогресс игры в файл для продолжения игры позже,
+# если игра не была завершена победой или поражением (то есть было прерывание программы во время игры).
+
 import random
+import datetime
+
+def log_action(message):
+    with open("hangman_log.txt", "a", encoding="utf-8") as log_file:
+        log_file.write(f"{datetime.datetime.now()}: {message}\n")
+
 # FINAL
 
 
@@ -121,24 +139,28 @@ def play_hangman():
     # for win_letter in range((len_word) - 1):
     #    word_append_letter[win_letter] = "_"
     print("Слово :  " + " ".join(word_append_letter))
+    log_action(f"Начало игры. Загаданное слово:  {rand_word}")
 
     while True:
         string = input("Угадай букву слова  , Количество букв = {} , у Вас {} попыток! \nВведите букву :".format(len(rand_word), attemp))
         print()
 
         if string in list_letter:
+            log_action(f"Введённая буква: {string}")
             if string in if_letter_:
                 print("Эта буква уже была : ", string)
+                log_action(f"Повторный ввод буквы: {string}, количество оставшихся попыток: {attemp}")
                 hangman = next(next_hangman)
                 print(hangman)
-                if attemp == 2:
-                    print("Последняя попытка!!! . Попробуй еще раз ! ")
-                    print("Слово :  " + " ".join(word_append_letter))
-
-                elif attemp < 2:
+                #if attemp == 1:
+                #    print("Последняя попытка!!! . Попробуй еще раз ! ")
+                #    print("Слово :  " + " ".join(word_append_letter))
+                #    attemp -= 1
+                if attemp < 1:
                     #hangman = next(next_hangman)
                     #print(hangman)
                     print("Вы проиграли... :( , это СЛОВО : ", rand_word)
+                    log_action(f"Пользователь проиграл.")
                     print()
                     s = input("Игра закончена. Клавиша ввод - дальше в меню")
                     if not s:
@@ -155,13 +177,14 @@ def play_hangman():
             print("Слово :" + " ".join(word_append_letter))
 
         else:
-            if attemp > 2:
+            if attemp > 1:
                 print("К сожалению , такой буквы нет в загаданном слове . Попробуй еще раз ! ")
                 print("Слово :  " + " ".join(word_append_letter))
+                log_action(f"Игрок ввёл не правельную букву: {string}, количество оставшихся попыток: {attemp}")
                 hangman = next(next_hangman)
                 print(hangman)
                 attemp -= 1
-            elif attemp == 2:
+            elif attemp == 1:
                 #hangman = next(next_hangman)
                 #print(hangman)
                 print("Последняя попытка!!! . Попробуй еще раз ! ")
@@ -172,6 +195,7 @@ def play_hangman():
                 hangman = next(next_hangman)
                 print(hangman)
                 print("Вы проиграли... :( , это СЛОВО : ", rand_word)
+                log_action(f"Игрок проиграл. Загаданное слово: {rand_word} \n------------------------------")
                 print()
                 s = input("Игра закончена. Клавиша ввод - дальше в меню")
                 if not s:
