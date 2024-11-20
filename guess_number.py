@@ -10,6 +10,12 @@
 # По ходу игры после каждой попытки пользователя компьютер выводит сообщение, было ли число пользователя
 # больше или меньше загаданного числа: "Загаданное число больше.", "Загаданное число меньше." соответственно.
 import random
+import datetime
+
+def log_action(message):
+    with open("guess_number_log.txt", "a", encoding="utf-8") as log_file:
+        log_file.write(f"{datetime.datetime.now()}: {message}\n")
+
 # FINAL
 def play_guess_number():
     print()
@@ -18,23 +24,38 @@ def play_guess_number():
     print()
     rand = random.randint(1,100)
 
+    log_action("Начало игры")
+    attempts = 0
     lis = []
-    while True:
-        if len(lis) > 6:
-            print("Вы превысили количество попыток ! ")
-            break
-        a = int(input('Введите свое предполагаемое число :'))
-        lis.append(a)
-        if a > rand:
-            print('К сожалению , Вы не угадали . \n Загаданое число меньше . \n Попробуйте еще раз )')
-        elif a < rand:
-            print('К сожалению , Вы не угадали . \n Загаданое число больше . \n Попробуйте еще раз )')
-        else:
-            print(f"Отлично! Вы угадали число с {len(lis)} попытки!")
-            print()
-            print()
-            input("Игра закончена. Клавиша ввод - дальше в меню")
-            from main import main
-            main()
+    for attempts in range(1, 7):
+        try:
+            guess = int(input('Введите свое предполагаемое число :'))
+            lis.append(guess)
+            if len(lis) > 6:
+                print("Вы превысили количество попыток ! ")
+                log_action(f"Игрок не угадал число {guess} с {attempts} попыток.")
+                break
+
+            log_action(f"Попытка {attempts}: Введено число {guess}")
+
+            if guess > rand:
+                print('К сожалению , Вы не угадали . \n Загаданое число меньше . \n Попробуйте еще раз )')
+                log_action(f"Игрок не угадал число. Загаданное число было меньше.")
+            elif guess < rand:
+                print('К сожалению , Вы не угадали . \n Загаданое число больше . \n Попробуйте еще раз )')
+                log_action(f"Игрок не угадал число. Загаданное число было больше.")
+            else:
+                print(f"Отлично! Вы угадали число с {len(lis)} попытки!")
+                print()
+                print()
+                log_action(f"Игрок угадал число {guess} с {attempts} попытки.")
+
+                input("Игра закончена. Клавиша ввод - дальше в меню")
+                from main import main
+                main()
+        except ValueError as e:
+            print(e)
+    print("Вы не угадали число ")
     print(f"Ваши попытки : {lis} ")
     print (f"Число , которое я загадал : {rand}")
+    log_action(f"Игрок не угадал число с {attempts} попыток. Число , которое я загадал : {rand}")
