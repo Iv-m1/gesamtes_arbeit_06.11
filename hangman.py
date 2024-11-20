@@ -142,14 +142,14 @@ def play_hangman():
     log_action(f"Начало игры. Загаданное слово:  {rand_word}")
 
     while True:
-        string = input("Угадай букву слова  , Количество букв = {} , у Вас {} попыток! \nВведите букву :".format(len(rand_word), attemp))
+        string = input("Угадай букву слова  , Количество букв = {} , у Вас {} попыток! \nВведите букву :".format(len(rand_word), attemp-1))
         print()
 
         if string in list_letter:
             log_action(f"Введённая буква: {string}")
             if string in if_letter_:
                 print("Эта буква уже была : ", string)
-                log_action(f"Повторный ввод буквы: {string}, количество оставшихся попыток: {attemp}")
+                log_action(f"Повторный ввод буквы: {string}, количество оставшихся попыток: {attemp-1}")
                 hangman = next(next_hangman)
                 print(hangman)
                 #if attemp == 1:
@@ -180,7 +180,7 @@ def play_hangman():
             if attemp > 1:
                 print("К сожалению , такой буквы нет в загаданном слове . Попробуй еще раз ! ")
                 print("Слово :  " + " ".join(word_append_letter))
-                log_action(f"Игрок ввёл не правельную букву: {string}, количество оставшихся попыток: {attemp}")
+                log_action(f"Игрок ввёл не правельную букву: {string}, количество оставшихся попыток: {attemp-1}")
                 hangman = next(next_hangman)
                 print(hangman)
                 attemp -= 1
@@ -201,4 +201,4 @@ def play_hangman():
                 if not s:
                     from main import main
                     main()
-            print(attemp)
+            print(attemp+1)
