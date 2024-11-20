@@ -180,7 +180,7 @@ def play_hangman():
             if attemp > 1:
                 print("К сожалению , такой буквы нет в загаданном слове . Попробуй еще раз ! ")
                 print("Слово :  " + " ".join(word_append_letter))
-                log_action(f"Игрок ввёл не правельную букву: {string}, количество оставшихся попыток: {attemp-1}")
+                log_action(f"Игрок ввёл неправильную букву: {string}, количество оставшихся попыток: {attemp-1}")
                 hangman = next(next_hangman)
                 print(hangman)
                 attemp -= 1
